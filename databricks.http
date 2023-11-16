@@ -1,0 +1,86 @@
+# databricks-api
+Databricks API examples
+
+# Identity and Access Management
+## Current User
+### Get current user info
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/preview/scim/v2/Me
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+## Users
+### List users
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/preview/scim/v2/Users
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+## Groups
+### List group details
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/preview/scim/v2/Groups
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+## Service principals
+### List service principals
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/preview/scim/v2/ServicePrincipals
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### Create service principal
+
+POST https://{{DATABRICKS_HOST}}/api/2.0/preview/scim/v2/ServicePrincipals
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+Content-Type: application/json
+
+{
+    "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:ServicePrincipal"
+    ],
+    "id": "test-sp",
+    "application_id": "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d",
+    "display_name": "test-sp",
+    "groups": [
+        {
+            "display": "test-group",
+            "value": "test-group"
+        }
+    ],
+    "roles": [
+        {
+            "display": "test-role",
+            "value": "test-role"
+        }
+    ],
+    "entitlements": [
+        {
+            "display": "test-entitlement",
+            "value": "test-entitlement"
+        }
+    ],
+    "externalId": "test-sp",
+    "active": true
+}
+
+# Settings
+## Token Management
+### List all tokens
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/token-management/tokens
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### Get token permissions
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/permissions/authorization/tokens
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### Create on-behalf token
+
+POST https://{{DATABRICKS_HOST}}/api/2.0/on-behalf-of/tokens
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+Content-Type: application/json
+
+{
+    "application_id": "",
+    "lifetime_seconds": 3600,
+    "comment": "token for testing"
+}
