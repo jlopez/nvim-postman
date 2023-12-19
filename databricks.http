@@ -1,6 +1,20 @@
 # databricks-api
 Databricks API examples
 
+# Databricks Workspace
+## Secret
+### List all scopes
+GET https://{{DATABRICKS_HOST}}/api/2.0/secrets/scopes/list
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### Get a secret
+GET https://{{DATABRICKS_HOST}}/api/2.0/secrets/get?scope=data-platform&key=google-play-reader-console-cookie-apisid
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### List secret keys
+GET https://{{DATABRICKS_HOST}}/api/2.0/secrets/list?scope=data-platform
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
 # Identity and Access Management
 ## Current User
 ### Get current user info
@@ -73,14 +87,24 @@ Authorization: Bearer {{DATABRICKS_TOKEN}}
 GET https://{{DATABRICKS_HOST}}/api/2.0/permissions/authorization/tokens
 Authorization: Bearer {{DATABRICKS_TOKEN}}
 
+### Get token info
+
+GET https://{{DATABRICKS_HOST}}/api/2.0/token-management/tokens/d2f2498b8316f6fd4191ff21d42fd2726980b36fd1f42d0c208355d53d11645d
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
+### Delete token
+
+DELETE https://{{DATABRICKS_HOST}}/api/2.0/token-management/tokens/4aa77dc801a3d683e3c426633fb4302ed35ee49c0aded9b8b08d0661235ae930
+Authorization: Bearer {{DATABRICKS_TOKEN}}
+
 ### Create on-behalf token
 
-POST https://{{DATABRICKS_HOST}}/api/2.0/on-behalf-of/tokens
+POST https://{{DATABRICKS_HOST}}/api/2.0/token-management/on-behalf-of/tokens
 Authorization: Bearer {{DATABRICKS_TOKEN}}
 Content-Type: application/json
 
 {
-    "application_id": "",
-    "lifetime_seconds": 3600,
-    "comment": "token for testing"
+    "application_id": "847ea02b-1037-41e2-9da2-2657e3dfdb3c",
+    "lifetime_seconds": -1,
+    "comment": "Token for Cookie Monster chrome plugin"
 }
